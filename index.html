@@ -1,22 +1,82 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Research updates from Brian Y. Tsui on robotics, code agents, and simulation.">
-<title>Research updates · Brian Y. Tsui</title>
-<style>
-:root{color-scheme:light;--ink:#233e34;--muted:#56665e;--green:#31644f}*{box-sizing:border-box}body{margin:0;background:#f6f7f3;color:var(--ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6}main{min-height:100svh;display:flex;flex-direction:column;justify-content:center;max-width:840px;margin:auto;padding:64px 28px}.eyebrow{font-size:13px;font-weight:650;letter-spacing:.14em;text-transform:uppercase;color:var(--green)}h1{font-size:clamp(36px,7vw,64px);line-height:1.1;letter-spacing:-.035em;max-width:700px;margin:24px 0}p{font-size:19px;color:var(--muted);max-width:570px}.note{margin:28px 0 36px;padding:20px 24px;background:white;border-left:3px solid var(--green);border-radius:0 8px 8px 0;font-size:17px}a{color:var(--green);text-underline-offset:5px}a:focus-visible{outline:3px solid var(--green);outline-offset:6px}footer{margin-top:64px;padding-top:22px;border-top:1px solid #d9e0d8;font-size:14px;color:var(--muted)}
-</style>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="From code-agent robot control to digital twins and small visuomotor policies. Our story and latest results from FAEA, FASC, and simulation experiments."><meta name="theme-color" content="#f8f7f2"><title>Frontier Agents as the Big Brain to Teach Small Visuomotor Brains · Research notes</title><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css?v=67fa0d3fbf">
+<link rel="canonical" href="https://robiemusketeer.github.io/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Research notes">
+<meta property="og:title" content="Frontier Agents as the Big Brain to Teach Small Visuomotor Brains">
+<meta property="og:description" content="From code-agent robot control to digital twins and small visuomotor policies. Our story and latest results from FAEA, FASC, and simulation experiments.">
+<meta property="og:url" content="https://robiemusketeer.github.io/">
+<meta property="og:image" content="https://robiemusketeer.github.io/assets/social-preview.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Frontier Agents as the Big Brain to Teach Small Visuomotor Brains">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Frontier Agents as the Big Brain to Teach Small Visuomotor Brains">
+<meta name="twitter:description" content="From code-agent robot control to digital twins and small visuomotor policies. Our story and latest results from FAEA, FASC, and simulation experiments.">
+<meta name="twitter:image" content="https://robiemusketeer.github.io/assets/social-preview.png">
+<meta name="twitter:image:alt" content="Frontier Agents as the Big Brain to Teach Small Visuomotor Brains">
 </head>
-<body>
-<main>
-<div class="eyebrow">Research updates</div>
-<h1>Robotics, code agents,<br>and simulation.</h1>
-<p>Thanks for visiting. This page will bring together the latest results, demos, papers, and research notes.</p>
-<p class="note">More updates are coming soon. Bookmark this page and check back after the workshop.</p>
-<p><a href="https://www.linkedin.com/in/brian-y-tsui/">Connect with Brian Y. Tsui on LinkedIn</a></p>
-<footer>Brian Y. Tsui</footer>
-</main>
-</body>
-</html>
+<body><a class="skip" href="#essay">Skip to essay</a><div class="progress" aria-hidden="true"></div>
+<header class="site-header"><a href="#top" class="wordmark"><span class="brand-mark" aria-hidden="true">↗</span> Research notes</a></header>
+<main id="top"><section class="hero"><div class="eyebrow"><span class="dot"></span> IROS 2026 · Research update</div><h1>Frontier Agents as the <em>Big Brain</em> to Teach Small Visuomotor Brains</h1><div class="byline"><span>By Brian Y. Tsui</span><span>September 2026</span><span>8 min read</span></div>
+<div class="people"><div class="person"><img src="assets/brian.webp" width="64" height="64" alt="Brian Y. Tsui"><div><strong>Brian Y. Tsui</strong><div class="profile-links"><a href="https://www.linkedin.com/in/brian-y-tsui/">LinkedIn ↗</a><a href="https://scholar.google.com/citations?user=Uq_QgjoAAAAJ&amp;hl=en">Scholar ↗</a></div></div></div><div class="person"><img src="assets/alan.webp" width="64" height="64" alt="Alan Y. Fang"><div><strong>Alan Y. Fang</strong><div class="profile-links"><a href="https://www.linkedin.com/in/alanycfang/">LinkedIn ↗</a></div></div></div></div>
+</section>
+<div class="reading-layout"><aside class="contents"><nav aria-label="Table of contents"><a href="#a-sock">How we started</a><a href="#perspective">What puzzled us</a><a href="#control">Claude Code as embodied agent</a><a href="#worlds">Scene reconstruction</a><a href="#implications">Larger implications</a><a href="#reading">Papers</a></nav></aside><article id="essay"><div class="intro">
+<p>We first wrote about using a generic code agent, Claude Code, for robotics tasks without demonstrations in <a href="https://arxiv.org/abs/2601.20334">Frontier Agent as Embodied Agent (FAEA)</a> (accepted at IROS 2026). In the months after we submitted FAEA to arXiv in January 2026, researchers at NVIDIA and groups led by Fei-Fei Li and Ken Goldberg released more comprehensive studies of code agents for embodied tasks. We refer you to our papers and that wider work for technical details. This blog shares our story, perspective, and latest lessons from using code agents for robotics.  </p>
+</div>
+
+<h2 id="a-sock" data-section>How we started</h2>
+
+<p>Our weekends have an Amdahl’s law problem: no matter how efficiently we finish everything else, the laundry still needs folding.</p>
+<p>The original motivation was simple and naive: seeing Physical Intelligence’s demo of folding laundry, our most hated task, and learning that a $200 SO-101 arm existed, it was hard not to think about robots. So one day, I (Brian) called up Alan, my roommate and friend from college. “$200 and no more laundry folding.” He quickly 3D-printed the SO-101 arm and plugged in the motors. Just when we thought we were about to kiss laundry folding goodbye forever, we realized that 20 episodes of demonstrations bought us the ability to move one particular sock in a rigid setup. The VLA’s performance shifted with the lighting and desk clutter.</p>
+<p>With limited time (we all have day jobs), a limited number of robot and human arms, and no GPU cluster, spending months collecting demonstrations for large-scale fine-tuning wasn’t palatable for us.</p>
+<h2 id="perspective" data-section>What puzzled us</h2>
+
+<p>We were as much discouraged as encouraged by this dilemma. Though neither of us works in robotics professionally, we sensed disconnects between the current paradigm of VLA scaling and some things we knew from outside robotics, which inspired us to try code agents for robotics:</p>
+<ul>
+<li><strong>Humans can imagine movements and learn them through practice.</strong> It’s like a coach teaching someone a sport: once a movement becomes second nature, you don’t need to talk yourself through every move. That is the analogy we mean by a big brain teaching a small visuomotor brain.</li>
+<li><strong>Complex language was never a foundation for visuomotor behavior across the wider animal kingdom. Animals can move and adapt without human-like language, with much smaller brains.</strong>  <a href="https://www.nature.com/articles/s41586-024-07686-5">The fruit fly brain has roughly 140,000 neurons</a>, yet supports complex behaviors like flight. A battery-powered robot has limited room for the power, cooling, memory, and weight needed by larger models. We cannot assume it will accommodate continued VLM scaling. Cloud offloading is only an option where the connection and latency allow it.</li>
+<li><strong>Human civilization was defined by tools.</strong> So why expect a robot to use the same two-finger gripper for every task? Even a foundation model trained across many grippers must adapt to new tools.</li>
+</ul>
+<h2 id="control" data-section>Claude Code as embodied agent</h2>
+
+<p>That constant puzzling feeling, combined with our limited willingness to spend weekends teleoperating socks, made us wonder whether Claude Code could natively generate motion trajectories. It was the closest thing we knew to the big brain, and we already had subscriptions. </p>
+<p>In hindsight, the idea of using Claude Code for embodied tasks was fairly straightforward. One of the evaluations in <a href="https://arxiv.org/abs/2210.03629">ReAct</a> (published in 2022) was about LLM-agent reasoning and acting in an embodied environment (though heavily simplified). In 2025, stories were emerging left and right about people using Claude Code for all kinds of tasks, so we conjectured that Claude Code could behave like a generic agent. Frontier models’ vision and embodied reasoning performance was improving rapidly. Code has long been a general way to express and solve computational problems since the Turing machine. Together, these observations suggested that a code agent could handle embodied tasks.</p>
+<p>The biggest mental barrier was burning an unknown amount of our limited tokens for weeks. We first explored the idea with Claude Code, borrowing the <a href="https://arxiv.org/abs/2502.18864">AI co-scientist paper’s</a> literature-search and hypothesis-debate approach. It ranked the idea above the alternatives it considered. So we decided, why not? And voilà, in less than 20 minutes, with a single prompt, Claude Code was doing pick-and-place inside LIBERO, with no demonstrations whatsoever, and could run its own trials and revise the code until success. </p>
+<figure class="wide video-figure"><video controls muted loop playsinline preload="auto" data-autoplay poster="assets/faea-demo.webp" aria-label="FAEA agent iterating on a grasp"><source src="assets/faea-demo.mp4" type="video/mp4"></video><figcaption>Claude Code tries, inspects the result, and revises its code in simulation until success</figcaption></figure>
+<p>The evaluation used privileged state, including object positions, and an unmodified Claude Agent SDK. This tested control-strategy discovery separately from perception. The paper reports 84.9% success on LIBERO, 85.7% on ManiSkill3, and 96% on MetaWorld—competitive with published demonstration-trained baselines (including VLAs), though the evaluation protocols differ. It’s an apples-to-oranges comparison, but the apples were big enough to make us think it was worth publishing. Hence the FAEA paper, with its embarrassingly simple methodology: prompt the agent to accomplish each task through the allowed robot controls, without directly changing the simulation state. </p>
+<h2 id="worlds" data-section>Scene reconstruction</h2>
+
+<p>In less than a year, native code agents have progressed to reconstructing simulation-ready 3D scenes from photographs with a single prompt, approaching aspects of custom-tailored pipelines. <a href="https://www.preprints.org/manuscript/202609.0344">Our FASC preprint</a> shows that exact-asset retrieval <strong>rose from 6.4% with Opus 4.6 to 66.2% with GPT-6 Astra</strong>, <strong>roughly a 10X improvement</strong>. Astra reduced median placement error to around 14 cm—much closer to the 6 cm reported for <a href="https://arxiv.org/abs/2410.07408">ACDC</a>’s curated pipeline. The prompt needed to create a complex 3D room in Isaac Sim was astoundingly simple. </p>
+<figure class="wide"><a class="zoom" href="assets/scaling.svg" aria-label="Enlarge FASC reconstruction performance across frontier models"><img src="assets/scaling.svg" alt="FASC reconstruction performance across frontier models" loading="lazy" width="518" height="369"></a></figure>
+<figure class="wide"><a class="zoom" href="assets/fasc-figure2.svg" aria-label="Enlarge the FASC reconstruction comparison"><img src="assets/fasc-figure2.svg" width="2660" height="650" alt="FASC comparison: reference images and seven agents across the best, median, and worst rooms" loading="lazy"></a><figcaption>The reconstruction comparison from FASC: input images and first-run renders for the best, median, and worst rooms by average placement error. <span class="enlarge-hint">Click to enlarge ↗</span></figcaption></figure>
+<p>The code agent can also generate motion trajectories for the robot to perform tasks in the reconstructed scene. </p>
+<figure class="wide video-figure"><video data-autoplay loop muted controls playsinline preload="metadata" poster="assets/trash-pickup-gaze.webp" aria-label="Robot turning its head toward targets while collecting three cans, with a synchronized head-camera view"><source src="assets/trash-pickup-gaze.mp4" type="video/mp4"></video></figure>
+<p>The code agent can also create a custom robot from a single text prompt.</p>
+<figure class="wide video-figure"><video class="orchard-motion" controls muted loop playsinline preload="metadata" data-autoplay poster="assets/orchard-drive-poster.webp" aria-label="Robot driving through the simulated orchard"><source src="assets/orchard-drive.mp4" type="video/mp4"><a href="assets/orchard-drive.gif">View the orchard motion GIF.</a></video></figure>
+
+<p>We trained ACT on demonstrations generated by Codex with GPT-6. The agent first wrote a baseline script for suction-based pick-and-place, then adapted it to individual targets where the baseline failed. </p>
+<p>This apple-harvesting pilot used <strong>100 successful training demonstrations and 20 held-out validation demonstrations</strong>.</p><figure class="wide video-figure"><video controls muted loop playsinline preload="metadata" data-autoplay poster="assets/act-success.webp" aria-label="Learned ACT policy successfully harvesting an apple in simulation"><source src="assets/act-success.mp4" type="video/mp4"></video><figcaption>A successful apple harvest by the learned ACT policy with simulated tactile sensing around the suction rim.</figcaption></figure>
+<p>A code agent can regenerate demonstrations adapted to a new sensing modality, without requiring another round of human teleoperation.</p>
+<figure class="wide" id="student-results"><div class="results-scroll"><table class="student-table"><caption>Student-policy results</caption><thead><tr><th scope="col">Sensing</th><th scope="col">Policy</th><th scope="col">Seen success rate</th><th scope="col">Unseen success rate</th></tr></thead><tbody class="without-tactile">
+<tr><th scope="row" class="sensing">Without tactile rim</th><th scope="row">ACT</th><td><strong>70%</strong></td><td><strong>62.5%</strong></td></tr>
+</tbody><tbody class="with-tactile">
+<tr><th scope="rowgroup" rowspan="5" class="sensing">With tactile rim</th><th scope="row">ACT</th><td><strong>95%</strong></td><td><strong>90%</strong></td></tr>
+<tr><th scope="row">SmolVLA</th><td><strong>40%</strong></td><td><strong>60%</strong></td></tr>
+<tr><th scope="row">π0.5</th><td><strong>5%</strong></td><td><strong>5%</strong></td></tr>
+<tr><th scope="row">Octo</th><td><strong>0%</strong></td><td><strong>0%</strong></td></tr>
+<tr><th scope="row">GR00T N1.7</th><td><strong>0%</strong></td><td><strong>0%</strong></td></tr>
+</tbody></table></div></figure>
+
+<h2 id="implications" data-section>Larger implications</h2>
+
+<p>An everyday code agent that keeps improving across robotics tasks has broad implications despite the simplicity of the methodology:</p>
+<ul>
+<li>It makes robotics more accessible: people like you and me can build a robot and scale demonstrations in simulation that yield meaningful performance. Relying solely on frontier VLA scaling limits that accessibility: the latest models, such as <a href="https://deepmind.google/blog/gemini-robotics-2-brings-whole-body-intelligence-to-robots/">Gemini Robotics 2</a> and <a href="https://www.pi.website/blog/pi07">pi0.7</a>, remain proprietary. Some tasks will still require tight vision-language-action modeling and substantial training resources. <strong>For recurring tasks in a particular setting, one can use a smaller model like ACT and train it on code-agent-generated demonstrations in simulation with energy-efficient edge deployment</strong>. </li>
+<li><strong>Many capabilities are already built in.</strong> New plugins and MCP tools keep appearing in existing harnesses like Claude Code and Codex. If your aunt emails about a visit and you need the robot to clean, the communication channel already exists as another MCP tool. We don’t need to invent another one.</li>
+</ul>
+<h2 id="reading">Papers</h2>
+<p>Our papers: <a href="https://arxiv.org/abs/2601.20334">FAEA</a> · <a href="https://www.preprints.org/manuscript/202609.0344">FASC</a>. The <a href="https://github.com/robiemusketeer/faea-sim">FAEA code</a> is available on GitHub.</p></article></div>
+<footer><a href="#top">Back to top ↑</a></footer></main>
+<dialog id="image-dialog" aria-label="Enlarged figure"><button class="close-dialog" aria-label="Close enlarged figure">Close ×</button><div class="figure-viewport" tabindex="0" role="region" aria-label="Enlarged figure; scroll horizontally to inspect"><img alt=""></div><p>Scroll across to inspect · Escape or Close to return</p></dialog><script src="script.js"></script></body></html>
