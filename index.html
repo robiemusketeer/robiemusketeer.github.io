@@ -16,6 +16,22 @@
 <meta name="twitter:description" content="From code-agent robot control to digital twins and small visuomotor policies. Our story and latest results from FAEA, FASC, and simulation experiments.">
 <meta name="twitter:image" content="https://robiemusketeer.github.io/assets/social-preview.png">
 <meta name="twitter:image:alt" content="Frontier Agents as the Big Brain to Teach Small Visuomotor Brains">
+<style id="iros-timeline-style">
+.iros-meetup{margin:30px 0 44px;padding:26px 28px;background:#eef2e9;border:1px solid var(--line);border-radius:10px}
+.iros-meetup h2{font-size:30px;margin:0 0 10px;letter-spacing:-.025em}
+.iros-meetup .iros-venue{font-size:13px;line-height:1.65;color:var(--muted);margin:0 0 24px}
+.iros-meetup h3{font:650 14px var(--sans);color:var(--green);margin:24px 0 14px}
+.iros-meetup ol{list-style:none;margin:0;padding:0 0 0 17px;border-left:1px solid #b6c5b1}
+.iros-meetup li{position:relative;display:grid;grid-template-columns:130px minmax(0,1fr);gap:16px;padding:0 0 22px;margin:0;font-size:14px;line-height:1.55;letter-spacing:0}
+.iros-meetup li:last-child{padding-bottom:0}
+.iros-meetup li::before{content:"";position:absolute;left:-22px;top:6px;width:8px;height:8px;background:var(--green);border-radius:50%;border:1px solid #eef2e9}
+.iros-meetup .iros-time{font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}
+.iros-meetup .iros-event{display:block;font-weight:650;margin-bottom:4px}
+.iros-meetup .iros-detail{display:block;font-size:13px;color:var(--muted);margin-top:5px}
+.iros-meetup .iros-paper{display:block;margin-top:10px}
+.iros-meetup .iros-status{font-weight:400;color:var(--muted);font-size:12px;display:block;margin-top:3px}
+@media(max-width:760px){.iros-meetup{padding:22px 18px}.iros-meetup h2{font-size:27px}.iros-meetup li{grid-template-columns:1fr;gap:5px}.iros-meetup .iros-venue{font-size:12px}}
+</style>
 </head>
 <body><a class="skip" href="#essay">Skip to essay</a><div class="progress" aria-hidden="true"></div>
 
@@ -25,6 +41,21 @@
 <div class="reading-layout"><aside class="contents"><nav aria-label="Table of contents"><a href="#a-sock">How we started</a><a href="#perspective">What puzzled us</a><a href="#control">Claude Code as embodied agent</a><a href="#worlds">Scene reconstruction</a><a href="#implications">Larger implications</a><a href="#reading">Papers</a></nav></aside><article id="essay"><div class="intro">
 <p>We first wrote about using a generic code agent, Claude Code, for robotics tasks without demonstrations in <a href="https://arxiv.org/abs/2601.20334">Frontier Agent as Embodied Agent (FAEA)</a> (accepted at IROS 2026). In the months after we submitted FAEA to arXiv in January 2026, researchers at NVIDIA and groups led by Fei-Fei Li and Ken Goldberg released more comprehensive studies of code agents for embodied tasks. We refer you to our papers and that wider work for technical details. This blog shares our story, perspective, and latest lessons from using code agents for robotics.  </p>
 </div>
+
+<section class="iros-meetup" id="iros-presentations" aria-labelledby="iros-meetup-title">
+<h2 id="iros-meetup-title">Meet us at IROS 2026</h2>
+<p class="iros-venue">David L. Lawrence Convention Center, Pittsburgh<br>All times are local: Eastern Daylight Time (EDT).</p>
+<h3>Tuesday, September 29</h3>
+<ol>
+<li><div class="iros-time"><time datetime="2026-09-29T09:33:00-04:00">9:33–9:44 AM</time></div><div><a class="iros-event" href="https://2026.ieee-iros.org/program/contributed-talks/#4d4d39:1480">FAEA · Main-conference talk</a>Demonstration-Free Robotic Control via LLM Agents<span class="iros-detail">Brian Y. Tsui · Room 328, Level 3<br>Focused session: LLM Agents Reasoning Through Robot Tasks</span></div></li>
+<li><div class="iros-time"><time datetime="2026-09-29T11:00:00-04:00">11:00 AM–12:30 PM</time></div><div><a class="iros-event" href="https://2026.ieee-iros.org/program/poster-sessions/#pn:1480">FAEA · Main-conference poster</a><span class="iros-detail">Brian Y. Tsui · Exhibit Hall B, Level 2 · Paper 1480</span></div></li>
+</ol>
+<h3>Thursday, October 1</h3>
+<ol>
+<li><div class="iros-time"><time datetime="2026-10-01T10:30:00-04:00">10:30–11:00 AM</time></div><div><a class="iros-event" href="https://scale-infra.github.io/iros2026/#schedule">ScaleInfra workshop · Poster</a>Code Agents Automate the Two Manual Bottlenecks of Sim-Based Robot Learning: Digital Twin Scene Construction and Demonstration Collection<span class="iros-detail">Brian Y. Tsui · Rooms 317 &amp; 318, Level 3</span></div></li>
+<li><div class="iros-time"><time datetime="2026-10-01T16:05:00-04:00">4:05–4:30 PM</time><span class="iros-status">Tentative program</span></div><div><a class="iros-event" href="https://sites.google.com/view/iros2026-agrobotics/program">Agrobotics workshop · Two posters</a><span class="iros-detail">Room 326, Level 3</span><span class="iros-paper"><strong>SC-Bench:</strong> A Simulation Benchmark for Specialty-Crop Manipulation</span><span class="iros-detail">Brian Y. Tsui</span><span class="iros-paper"><strong>Tools, Not Grippers:</strong> Mass-Produced Hand Tools as a Module Library for Reconfigurable Agricultural Manipulation</span><span class="iros-detail">Alan Y. Fang</span></div></li>
+</ol>
+</section>
 
 <h2 id="a-sock" data-section>How we started</h2>
 
